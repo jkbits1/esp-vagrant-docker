@@ -1,0 +1,33 @@
+# this works ?? - needs HostVagrantFile defined below
+
+# attempting to convert to ubuntu from apache
+# changes
+#   renamed to ubuntuX, remains running set to false
+
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+# Avoid having to pass --provider=docker
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'docker'
+Vagrant.configure("2") do |config|
+  # Start Provision
+  #config.vm.define "ubuntu" do |a|
+  
+    # Tell Vagrant to use Docker
+    config.vm.provider "docker" do |d|
+      # Pull the ubuntu container from the docker hub
+      d.image = "ubuntu"
+      # Tell Docker to name the container 'ubuntuX2'
+      d.name = "ubuntu"
+      # Assign ports 80 and 443 to the container
+      d.ports = ["80:80", "433:443"]
+
+      # Make sure the container stays running when started #- changed
+      #d.remains_running = true
+      d.remains_running = false
+
+      # Use the HostVagrantfile settings to provision
+      # commenting out should use b2d
+      #d.vagrant_vagrantfile = "HostVagrantfile"
+    end
+  #end
+end

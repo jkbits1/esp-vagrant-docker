@@ -1,0 +1,16 @@
+# this works, there is an nginx image in boot2docker vm (login to that without ssh)
+
+Vagrant.configure("2") do |config|
+
+  # issue with powershell 2.0
+  # Disable synced folders for the Docker container
+  # (prevents an NFS error on "vagrant up")
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+
+  config.vm.provider "docker" do |d|
+    d.image           = "quintenk/jenkins"
+    d.has_ssh         = false
+    d.ports           = ["8080:8080"]
+    d.volumes         = ["/data/jenkins:/root/.jenkins"]
+  end
+end
