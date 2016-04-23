@@ -41,6 +41,10 @@ Vagrant.configure("2") do |config|
       # Use the HostVagrantfile settings to provision
       # commenting out should use b2d
       #d.vagrant_vagrantfile = "HostVagrantfile"
+
+      # attempt to use dockerfile from host
+      # conflicts with image?
+      #d.build_dir = "."
     end
   #end
 end
