@@ -22,6 +22,12 @@ Vagrant.configure("2") do |config|
   # (prevents an NFS error on "vagrant up")
   config.vm.synced_folder ".", "/vagrant", disabled: true
 
+  # doesn't seem correct here, may not be relevant
+  # Bump the memory allocated to the VM up to 1 gigabyte as the compilation of
+  # the esp-open-sdk tools requires more memory to complete.
+  # DONE MANUALLY IN VBOX UI
+  # config.vm.memory = 1024
+
   # Start Provision
   #config.vm.define "ubuntu" do |a|
   
@@ -44,7 +50,8 @@ Vagrant.configure("2") do |config|
 
       # attempt to use dockerfile from host
       # conflicts with image?
-      #d.build_dir = "."
+      #d.build_dir = "."      
+      
     end
   #end
 end
