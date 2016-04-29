@@ -1,0 +1,57 @@
+# this works ?? - defined below
+
+# adapted ubuntu file not to use HostVagrantFile, so uses boot2docker
+# copied in shell line, and disabled synced folders (which work with custom vm
+# , but not boot2docker)
+
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+# Avoid having to pass --provider=docker
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'docker'
+Vagrant.configure("2") do |config|
+
+  # copied from hostvagrantfile
+  # The following line terminates all ssh connections. Therefore
+  # Vagrant will be forced to reconnect.
+  # That's a workaround to have the docker command in the PATH
+  config.vm.provision "shell", inline:
+     "ps aux | grep 'sshd:' | awk '{print $2}' | xargs kill"
+
+  # issue with powershell 2.0
+  # Disable synced folders for the Docker container
+  # (prevents an NFS error on "vagrant up")
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+
+  # doesn't seem correct here, may not be relevant
+  # Bump the memory allocated to the VM up to 1 gigabyte as the compilation of
+  # the esp-open-sdk tools requires more memory to complete.
+  # DONE MANUALLY IN VBOX UI
+  # config.vm.memory = 1024
+
+  # Start Provision
+  #config.vm.define "debian" do |a|
+  
+    # Tell Vagrant to use Docker
+    config.vm.provider "docker" do |d|
+      # Pull the debian container from the docker hub
+      d.image = "debian"
+      # Tell Docker to name the container 'debian'
+      d.name = "debian"
+      # Assign ports 80 and 443 to the container
+      d.ports = ["80:80", "433:443"]
+      
+      # Make sure the container stays running when started #- changed
+      #d.remains_running = true
+      d.remains_running = false
+      
+      # Use the HostVagrantfile settings to provision
+      # commenting out should use b2d
+      #d.vagrant_vagrantfile = "HostVagrantfile"
+
+      # attempt to use dockerfile from host
+      # conflicts with image?
+      #d.build_dir = "."      
+      
+    end
+  #end
+end
