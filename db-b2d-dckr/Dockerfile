@@ -16,10 +16,18 @@ RUN apt-get install -y make unrar-free autoconf automake libtool gcc g++ gperf \
 # required for debian
 RUN apt-get install libtool-bin
 #seems required for make
-RUN apt-get install wget
+RUN apt-get install -y wget
 #seems required for esp-open-sdk?
 RUN apt-get install bzip2
 
+RUN useradd -ms /bin/bash buildr && usermod -a -G sudo buildr
+
+USER buildr
+
+ENV HOME /home/buildr
+
+RUN mkdir $HOME/build
+WORKDIR $HOME/build
 
 #user buildr, gp sudo, $home/build (build is not username, just where we
 #put docs git stuff)
@@ -29,18 +37,18 @@ RUN apt-get install bzip2
 
 
 RUN echo "Installing esp-open-sdk depends..."
-#RUN git clone --recursive https://github.com/pfalcon/esp-open-sdk.git
-#RUN echo "Installed sdk"
+RUN git clone --recursive https://github.com/pfalcon/esp-open-sdk.git
+RUN echo "Installed sdk"
 #RUN cd /esp-open-sdk/
 #RUN cd ~/../esp-open-sdk/
 #RUN echo pwd
-#WORKDIR /esp-open-sdk/
 
+WORKDIR $HOME/build/esp-open-sdk/
 
+RUN make toolchain esptool libhal STANDALONE=n
+RUN echo "built sdk"
 
-#RUN make toolchain esptool libhal STANDALONE=n
-#RUN echo "built sdk"
-
+ENV PATH $PATH:$HOME/build/esp-open-sdk/xtensa-lx106-elf/bin/
 #export PATH=$PATH:$HOME/build/esp-open-sdk/xtensa-lx106-elf/bin/
 
 #install, build rtos (whiffy)
@@ -73,3 +81,6 @@ RUN echo "Installing esp-open-sdk depends..."
 #debian:rtos-lisp-jk /bin/bash
 
 #docker run -t -i --device=/dev/ttyUSB0 debian:rtos-lisp-jk /bin/bash
+
+# delete containers (so can delete images)
+#docker rm $(docker ps -a -q)
