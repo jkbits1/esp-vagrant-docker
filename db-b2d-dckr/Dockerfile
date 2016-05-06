@@ -8,6 +8,9 @@
 #FROM ubuntu:eo-sdk
 FROM debian:latest
 
+# NOTE install anything that needs root user here, as change to
+#      another user below
+
 RUN apt-get update
 RUN apt-get install -y make unrar-free autoconf automake libtool gcc g++ gperf \
     flex bison texinfo gawk ncurses-dev libexpat-dev python python-serial sed \
@@ -19,6 +22,11 @@ RUN apt-get install libtool-bin
 RUN apt-get install -y wget
 #seems required for esp-open-sdk?
 RUN apt-get install bzip2
+
+# needed by rtos
+RUN echo "install libs for 32/64 compatibility"
+RUN apt-get install -y gcc-multilib g++-multilib
+
 
 RUN useradd -ms /bin/bash buildr && usermod -a -G sudo buildr
 
@@ -51,12 +59,21 @@ RUN echo "built sdk"
 ENV PATH $PATH:$HOME/build/esp-open-sdk/xtensa-lx106-elf/bin/
 #export PATH=$PATH:$HOME/build/esp-open-sdk/xtensa-lx106-elf/bin/
 
+WORKDIR $HOME/build/
 #install, build rtos (whiffy)
 
-#apt-get install gcc-multilib g++-multilib
+RUN echo "Installing rtos"
+RUN git clone --recursive https://github.com/Superhouse/esp-open-rtos.git
+RUN echo "Installed rtos"
 
+WORKDIR $HOME/build/esp-open-rtos
 #make -C examples/http_get
 
+
+WORKDIR $HOME/build/
+RUN echo "install jk fork of esp lisp"
+RUN git clone https://github.com/jkbits1/esp-lisp-jk.git
+RUN echo "installed esp lisp"
 
 #install jk lisp fork
 
