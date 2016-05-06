@@ -72,8 +72,8 @@ WORKDIR $HOME/build/esp-open-rtos
 
 WORKDIR $HOME/build/
 RUN echo "install jk fork of esp lisp"
-RUN git clone https://github.com/jkbits1/esp-lisp-jk.git
-RUN echo "installed esp lisp"
+RUN git clone https://github.com/jkbits1/esp-lisp.git
+RUN echo "installed esp lisp jk"
 
 #install jk lisp fork
 
