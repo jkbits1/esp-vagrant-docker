@@ -27,6 +27,8 @@ RUN apt-get install bzip2
 RUN echo "install libs for 32/64 compatibility"
 RUN apt-get install -y gcc-multilib g++-multilib
 
+# for editing 
+RUN apt-get install -y vim-tiny
 
 RUN useradd -ms /bin/bash buildr && usermod -a -G sudo buildr
 
@@ -101,3 +103,11 @@ RUN echo "installed esp lisp jk"
 
 # delete containers (so can delete images)
 #docker rm $(docker ps -a -q)
+
+#id (shows user id for logged in user)
+#join running container as user id 1000 (0 is root)
+#join running container as user id 1000 (0 is root)
+#docker exec -u 1000 -ti cont-id /bin/bash
+
+# join running container as root
+#docker exec -ti cont-id /bin/bash
