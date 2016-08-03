@@ -20,8 +20,8 @@ RUN apt-get install -y make unrar-free autoconf automake libtool gcc g++ gperf \
 RUN apt-get install libtool-bin
 #seems required for make
 RUN apt-get install -y wget
-#seems required for esp-open-sdk?
-RUN apt-get install bzip2
+#seems required for esp-open-sdk - help2man & python added later, as needed now
+RUN apt-get install -y bzip2 help2man python2.7-dev
 
 # needed by rtos
 RUN echo "install libs for 32/64 compatibility"
