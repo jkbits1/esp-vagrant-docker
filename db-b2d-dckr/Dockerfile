@@ -30,6 +30,10 @@ RUN apt-get install -y gcc-multilib g++-multilib
 # for editing 
 RUN apt-get install -y vim-tiny
 
+# for connecting to device
+RUN apt-get install -y screen
+
+
 RUN useradd -ms /bin/bash buildr && usermod -a -G sudo buildr
 
 USER buildr
@@ -90,16 +94,23 @@ RUN echo "installed esp lisp jk"
 #tce-load -wi python.tcz
 #ssl
 
-#apt-get install -y screen
-
 #python esptool.py -p /dev/ttyUSB0 --baud 115200
 #write_flash --flash_size=8m 0 0x00000.bin 0x20000 0x20000.bin
+#write_flash -fs=16m -fm qio -ff 40m 0x0 rboot.bin 0x1000 blank_config.bin 0x2000 esp-lisp.bin 
 
 #gives docker ttyusb0
 #docker run -t -i --privileged -v /dev/bus/usb:/dev/bus/usb
 #debian:rtos-lisp-jk /bin/bash
 
+# dmesg | grep tty
+# mknod /dev/ttyUSB0 c 188 0
+
+# screen /dev/ttyUSB0 115200
+
 #docker run -t -i --device=/dev/ttyUSB0 debian:rtos-lisp-jk /bin/bash
+
+# run as root
+#docker run -t -i -u 0 --device=/dev/ttyUSB0 debian:rtos-lisp-jk /bin/bash
 
 # delete containers (so can delete images)
 #docker rm $(docker ps -a -q)
@@ -111,3 +122,6 @@ RUN echo "installed esp lisp jk"
 
 # join running container as root
 #docker exec -ti cont-id /bin/bash
+
+# cf docker issues 8755 for details of this workaround
+# docker exec -ti -u 0 cont-id script -q -c "/bin/bash" /dev/null
