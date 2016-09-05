@@ -20,8 +20,8 @@ RUN apt-get install -y make unrar-free autoconf automake libtool gcc g++ gperf \
 RUN apt-get install libtool-bin
 #seems required for make
 RUN apt-get install -y wget
-#seems required for esp-open-sdk?
-RUN apt-get install bzip2
+#seems required for esp-open-sdk - help2man & python added later, as needed now
+RUN apt-get install -y bzip2 help2man python2.7-dev
 
 # needed by rtos
 RUN echo "install libs for 32/64 compatibility"
@@ -29,6 +29,10 @@ RUN apt-get install -y gcc-multilib g++-multilib
 
 # for editing 
 RUN apt-get install -y vim-tiny
+
+# for connecting to device
+RUN apt-get install -y screen
+
 
 RUN useradd -ms /bin/bash buildr && usermod -a -G sudo buildr
 
@@ -85,19 +89,17 @@ RUN echo "installed esp lisp jk"
 #b2d? shared folders 
 #sudo mount -t vboxsf win_share /VM_share
 
-#copy files from host to dckr (docker cp sometimes gives an error)
-#cd host folder 
-#tar -cv * | docker exec -i ctr-id tar x -C dckr-fldr-path
-
+# copy files from host to docker (docker cp sometimes gives an error)
+# cd host folders
+# tar -cv * | docker exec -i ctr-id tar x -C docker-folder-path
 
 #b2d - installs, tinylinux
 #tce-load -wi python.tcz
 #ssl
 
-#apt-get install -y screen
-
 #python esptool.py -p /dev/ttyUSB0 --baud 115200
 #write_flash --flash_size=8m 0 0x00000.bin 0x20000 0x20000.bin
+#write_flash -fs=16m -fm qio -ff 40m 0x0 rboot.bin 0x1000 blank_config.bin 0x2000 esp-lisp.bin 
 
 #gives docker ttyusb0
 # run on host, before starting b2d, to check usb devices
@@ -124,7 +126,30 @@ RUN echo "installed esp lisp jk"
 #udevadm info -a -p  $(udevadm info -q path -n /dev/ttyUSB0)
 
 
+# from b2d check privilege state of container with this
+# docker inspect --format='{{.HostConfig.Privileged}}' ctr-id
+
+# then, may need to repower esp for dockerto connect usb0
+# and this??
+# http://unix.stackexchange.com/questions/42844/how-do-i-access-a-usb-serial-port-without-an-entry-in-dev
+
+# dmesg | grep tty
+# mknod /dev/ttyUSB0 c 188 0
+#
+# info from here
+#http://unix.stackexchange.com/questions/97235/how-to-check-if-an-usb-device-is-present-without-lsusb
+# cat /sys/bus/usb/devices/*/product
+#
+#info on usb device once connected
+#http://unix.stackexchange.com/questions/144029/command-to-determine-ports-of-a-device-like-dev-ttyusb0
+#udevadm info -a -p  $(udevadm info -q path -n /dev/ttyUSB0)
+
+# screen /dev/ttyUSB0 115200
+
 #docker run -t -i --device=/dev/ttyUSB0 debian:rtos-lisp-jk /bin/bash
+
+# run as root
+#docker run -t -i -u 0 --device=/dev/ttyUSB0 debian:rtos-lisp-jk /bin/bash
 
 # delete containers (so can delete images)
 #docker rm $(docker ps -a -q)
@@ -184,8 +209,8 @@ RUN echo "installed esp lisp jk"
 # /etc/network/interfaces
 
 # run from docker lisp/firmware folder
-#esptool.py -p /dev/ttyUSB0 --baud 115200 write_flash --flash_size=8m 
-# 0 $HOME/.../firmware/0x00000.bin 
+#esptool.py -p /dev/ttyUSB0 --baud 115200 write_flash --flash_size=8m
+# 0 $HOME/.../firmware/0x00000.bin
 # 0x20000 $HOME/.../firmware/0x20000.bin
 
 # cd $HOME/.../esp-open-sdk/esptool/
@@ -207,7 +232,9 @@ RUN echo "installed esp lisp jk"
 #
 # (seems to need root user)
 #
-# docker exec -ti -u 0 ctr-id script -q -c "/bin/bash" /dev/null
+# cf docker issues 8755 for details of this workaround
+# docker exec -ti -u 0 cont-id script -q -c "/bin/bash" /dev/null
+
 
 # use of netcat to test container linking - minor revisions to run commands from :
 # https://liquidat.wordpress.com/2014/06/12/howto-test-docker-linking-with-netcat/
