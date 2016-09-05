@@ -209,3 +209,17 @@ RUN echo "installed esp lisp jk"
 #
 # docker exec -ti -u 0 ctr-id script -q -c "/bin/bash" /dev/null
 
+# use of netcat to test container linking - minor revisions to run commands from :
+# https://liquidat.wordpress.com/2014/06/12/howto-test-docker-linking-with-netcat/
+# docker run -t centos yum -y install nc
+# docker commit c1f0f1a848fb nc
+
+# docker run -d -p 8080 --name nc-server nc nc -l 8080
+# docker inspect nc-server | grep IP
+
+# docker run -ti --rm=true --name nc-client --link nc-server nc /bin/bash
+
+# in client, env and nc server 8080, type something then enter
+# confirm data sent from client
+# docker logs nc-server
+
