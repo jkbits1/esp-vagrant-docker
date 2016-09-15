@@ -86,9 +86,6 @@ RUN echo "installed esp lisp jk"
 #from docker to b2d
 #docker cp 05767738f09a:/home/buildr/.../firmware/ .
 
-#b2d? shared folders 
-#sudo mount -t vboxsf win_share /VM_share
-
 # copy files from host to docker (docker cp sometimes gives an error)
 # cd host folders
 # tar -cv * | docker exec -i ctr-id tar x -C docker-folder-path
@@ -166,12 +163,10 @@ RUN echo "installed esp lisp jk"
 # connect to docker from win host
 #
 
-#http://ispyker.blogspot.co.uk/2014/04/
-#accessing-docker-container-private.html
+#http://ispyker.blogspot.co.uk/2014/04/accessing-docker-container-private.html
 
 # interesting for auto dns route
-#http://rosenberg.io/2014/08/08/
-#docker-boot2docker-and-dns-resolution-of-containers.html
+#http://rosenberg.io/2014/08/08/docker-boot2docker-and-dns-resolution-of-containers.html
 
 #add adapter as described, manually in vbox 
 #(may be able to adjust vagrant, as vagrant up overwrites)
