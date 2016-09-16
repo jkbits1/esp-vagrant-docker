@@ -1,6 +1,6 @@
 #b2d? shared folders
 
-# go to gh docker elm folder :
+# go to Dockerfile  folder :
 # mount shared folder, go to this folder
 
 # cd /var
@@ -22,6 +22,7 @@
 # http://ralfw.de/2016/08/get-elm-up-and-running/
 # docker run -it -p 8000:8000 -v $(pwd):/home/buildr/build/esp-lisp2 esp /bin/bash
 
+# NOTE: works for flashing on docker machine (flashing itself was done using exec after this run)
 # docker run -ti -u 0 -v $(pwd):/home/buildr/build/esp-lisp2 --device=/dev/ttyUSB0 esp /bin/bash
 
 # cd /home/buildr/build/esp-lisp2

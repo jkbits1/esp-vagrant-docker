@@ -252,10 +252,10 @@ RUN echo "installed esp lisp jk"
 # confirm data sent from client
 # docker logs nc-server
 
+#
+# see Notes.md
+#
 # docker run -it -p 8000:8000 -v $(pwd):/home/buildr/build/esp-lisp2 esp /bin/bash
-
 # docker run -it -u 0 --device=/dev/ttyUSB0 debian:rtos-lisp-jk /bin/bash
 
-# NOTE: works for flashing on docker machine (flashing itself was done using exec after this run)
-# docker run -it -u 0 -v $(pwd):/home/buildr/build/esp-lisp2 --device=/dev/ttyUSB0 esp /bin/bash
 
