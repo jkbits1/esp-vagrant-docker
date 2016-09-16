@@ -94,9 +94,15 @@ RUN echo "installed esp lisp jk"
 #tce-load -wi python.tcz
 #ssl
 
-#python esptool.py -p /dev/ttyUSB0 --baud 115200
-#write_flash --flash_size=8m 0 0x00000.bin 0x20000 0x20000.bin
-#write_flash -fs=16m -fm qio -ff 40m 0x0 rboot.bin 0x1000 blank_config.bin 0x2000 esp-lisp.bin 
+#
+# copy version 2 prebuilt rboot and blank_config .bin files to esptool folder
+# .../esp-open-rtos/bootloader/firmware_prebuilt# cp *.bin ../../../esp-open-sdk/esptool/
+#
+# python esptool.py -p /dev/ttyUSB0 --baud 115200
+# version 1 bins
+# write_flash --flash_size=8m 0 0x00000.bin 0x20000 0x20000.bin
+# version 2 bins
+# write_flash -fs=16m -fm qio -ff 40m 0x0 rboot.bin 0x1000 blank_config.bin 0x2000 esp-lisp.bin 
 
 #gives docker ttyusb0
 # run on host, before starting b2d, to check usb devices
@@ -228,6 +234,7 @@ RUN echo "installed esp lisp jk"
 # (seems to need root user)
 #
 # cf docker issues 8755 for details of this workaround
+# NOTE: works for flashing from docker machine
 # docker exec -ti -u 0 cont-id script -q -c "/bin/bash" /dev/null
 
 
@@ -244,4 +251,11 @@ RUN echo "installed esp lisp jk"
 # in client, env and nc server 8080, type something then enter
 # confirm data sent from client
 # docker logs nc-server
+
+# docker run -it -p 8000:8000 -v $(pwd):/home/buildr/build/esp-lisp2 esp /bin/bash
+
+# docker run -it -u 0 --device=/dev/ttyUSB0 debian:rtos-lisp-jk /bin/bash
+
+# NOTE: works for flashing on docker machine (flashing itself was done using exec after this run)
+# docker run -it -u 0 -v $(pwd):/home/buildr/build/esp-lisp2 --device=/dev/ttyUSB0 esp /bin/bash
 
