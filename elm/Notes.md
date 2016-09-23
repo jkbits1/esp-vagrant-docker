@@ -16,7 +16,8 @@
 
 # useful tips here
 # http://ralfw.de/2016/08/get-elm-up-and-running/
-# docker run -it -u 0 -p 8000:8000 -v $(pwd):/tmp/elm elm-server /bin/bash
+# docker run -it -u 0 -p 8000:8000 -v $(pwd):/tmp/elm     elm-server /bin/bash
+# docker run -it -u 0 -p 8000:8000 -v $(pwd):/usr/src/app elm-server /bin/bash
 
 # cd /tmp/elm
 
