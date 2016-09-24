@@ -10,7 +10,10 @@
 
 # useful tips here
 # http://ralfw.de/2016/08/get-elm-up-and-running/
-# docker run -it -p -u 0 8000:8000 -v $(pwd):/usr/src/app carpool /bin/bash
+# docker run -it -p 8000:8000 -v $(pwd):/usr/src/app carpool /bin/bash
+
+# docker exec -u 0 -it cont-id /bin/bash
+
 
 # NOTE: works for flashing on docker machine (flashing itself was done using exec after this run)
 # docker run -ti -u 0 -v $(pwd):/usr/src/app carpool-app /bin/bash

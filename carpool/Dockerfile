@@ -10,6 +10,15 @@ RUN apt-get install -y netcat
 # for editing 
 RUN apt-get install -y vim-tiny
 
+
+#  npm install pg --save --no-bin-links
+
+
+# https://github.com/jedireza/generator-hapi-style
+# RUN npm install -g yo
+# RUN npm install -g generator-hapi-style
+
+
 # https://nodejs.org/en/docs/guides/nodejs-docker-webapp/
 
 # https://hub.docker.com/_/node/
