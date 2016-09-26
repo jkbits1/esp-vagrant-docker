@@ -13,10 +13,23 @@ RUN apt-get install -y vim-tiny
 
 #  npm install pg --save --no-bin-links
 
+# for dev
+# npm install -g nodemon
 
+# yeoman
 # https://github.com/jedireza/generator-hapi-style
 # RUN npm install -g yo
 # RUN npm install -g generator-hapi-style
+
+# loopback
+# https://docs.strongloop.com/display/public/LB/LoopBack+core+concepts
+# https://docs.strongloop.com/display/public/LB/Create+a+simple+API
+# https://docs.strongloop.com/display/public/LB/Discovering+models+from+relational+databases
+
+# npm install -g strongloop
+
+# in carpoolBack folder
+# npm install loopback-connector-postgresql --save
 
 
 # https://nodejs.org/en/docs/guides/nodejs-docker-webapp/
