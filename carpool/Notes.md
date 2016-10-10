@@ -10,8 +10,7 @@
 
 # useful tips here
 # http://ralfw.de/2016/08/get-elm-up-and-running/
-# docker run -it -p 8000:8000 -v $(pwd):/usr/src/app carpool /bin/bash
-
+#
 # using postgres docker machine
 # docker run -it --link cp-pg-svr -p 8000:8000 -v $(pwd):/usr/src/app carpool /bin/bash
 
@@ -33,5 +32,5 @@ export PORT=8000
 export PGHOST=$CP_PG_SVR_PORT_5432_TCP_ADDR
 export PGUSER=postgres, export PGUSER=carpool_web
 export PGPASSWORD=$CP_PG_SVR_ENV_POSTGRES_PASSWORD
-export PGDATABASE=carpool
+export PGDATABASE=carpool.dev
 

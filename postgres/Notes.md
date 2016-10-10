@@ -19,6 +19,9 @@
 
 # CLIENT
 # docker run -it --link cp-pg-svr -v $(pwd):/usr/src/app postgres:9.5.4 /bin/bash
+# 
+# compose
+# docker run -it --link compose_cp-pg-svr2_1 -v $(pwd):/usr/src/app postgres:9.5.4 /bin/bash
 
 # cd /usr/src/app/
 
@@ -37,5 +40,7 @@
 # create roles and schemas in carpool db
 # psql -h $CP_PG_SVR_PORT_5432_TCP_ADDR -U postgres carpool -a -f ./carpool_roles.sql
 # psql -h $CP_PG_SVR_PORT_5432_TCP_ADDR -U postgres carpool -a -f ./carpool_schema.sql
+
+# pg_restore -h $CP_PG_SVR_PORT_5432_TCP_ADDR -U postgres -d carpool -a ./carpool_static_data.dat
 
  cat ../nodeAppPostPg/cp_web_log | ./node_modules/bunyan/bin/bunyan -j
