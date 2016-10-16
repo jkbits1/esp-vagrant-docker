@@ -7,13 +7,18 @@
 # docker run --name cp-pg-svr -p 5432:5432 -e POSTGRES_PASSWORD=pwd -d cp-svr:db
 
 # SERVER - clean
+# docker run --name cp-pg-svr -p 5432:5432 -v $(pwd):/usr/src/app -e POSTGRES_PASSWORD=pwd -d postgres:9.5.4
+# 
+# SERVER - clean (can use as client with sync'ed folders)
 # docker run --name cp-pg-svr -p 5432:5432 -e POSTGRES_PASSWORD=pwd -d postgres:9.5.4
+
+# log in to server as postgres (psql needs this account)
+# (avoids new machine just for psql client) 
+#
+# docker exec -it -u postgres e06 /bin/bash
 
 # save db state for later - doesn't work ?
 # docker commit -m " pg-carpool-db" 808 cp-pg-svr
-
-# log in to server as postgres (psql needs this account)
-# docker exec -it -u postgres e06 /bin/bash
 
 # in shared folders, go to gh carpool backend on host
 
@@ -27,6 +32,7 @@
 
 # psql -h $CP_PG_SVR_PORT_5432_TCP_ADDR -U postgres
 # create database carpool;
+# create database "carpool.dev";
 
 # connect to carpool for queries
 # \c carpool
@@ -43,4 +49,12 @@
 
 # pg_restore -h $CP_PG_SVR_PORT_5432_TCP_ADDR -U postgres -d carpool -a ./carpool_static_data.dat
 
+# from server
+# psql "carpool.dev" -a -f ./carpool_roles.sql
+# psql "carpool.dev" -a -f ./carpool_schema.sql
+# pg_restore -d "carpool.dev" -a ./carpool_static_data.dat
+
  cat ../nodeAppPostPg/cp_web_log | ./node_modules/bunyan/bin/bunyan -j
+
+# set user password
+# alter user carpool_web with password '';

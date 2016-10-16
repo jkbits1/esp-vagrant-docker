@@ -34,3 +34,8 @@ export PGUSER=postgres, export PGUSER=carpool_web
 export PGPASSWORD=$CP_PG_SVR_ENV_POSTGRES_PASSWORD
 export PGDATABASE=carpool.dev
 
+cd /opt/carpool/web
+cd v1.1/nodeAppPostPg/
+tail, head cp_web_log
+cat cp_web_log | grep -i "insert failed:" > /home/jon.kelly/issues2.txt
+cat issues2.txt | grep FirstName
