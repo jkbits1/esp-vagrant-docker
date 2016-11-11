@@ -14,6 +14,23 @@
 # using postgres docker machine
 # docker run -it --link cp-pg-svr -p 8000:8000 -v $(pwd):/usr/src/app carpool /bin/bash
 
+# debug versions
+# docker run -it --link cp-pg-svr -p 8000:8000 -p 5858:5858 -v $(pwd):/usr/src/app carpool /bin/bash
+# docker run -it --link cp-pg-svr -p 8000:8000 -p 8080:8080 -p 5858:5858 -v $(pwd):/usr/src/app carpool /bin/bash
+
+ {
+      "name": "Attach",
+      "type": "node",
+      "request": "attach",
+      "port": 5858,
+      "address": "localhost",
+      "restart": false,
+      "sourceMaps": false,
+      "outFiles": [],
+      "localRoot": "${workspaceRoot}/nodeAppPostPg",
+      "remoteRoot": "/usr/src/app/nodeAppPostPg/"
+    },
+    
 # cd /usr/src/app/
 
 # docker exec -u 0 -it cont-id /bin/bash
