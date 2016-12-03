@@ -2,6 +2,6 @@
 FROM haskell:7
 
 # RUN stack install pandoc pandoc-citeproc
-RUN cabal update 
-# RUN cabal update && cabal install pandoc pandoc-citeproc
+# RUN cabal update 
+RUN cabal update && cabal install pandoc pandoc-citeproc
 ENTRYPOINT ["pandoc"]
