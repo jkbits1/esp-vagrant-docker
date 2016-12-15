@@ -15,3 +15,4 @@
 # using postgres docker machine
 # docker run -it -p 8000:8000 -v $(pwd):/usr/src/app haskell-dev /bin/bash
 # docker run -it -p 8000:8000 -v $(pwd):/usr/src/app haskell-basic /bin/bash
+# docker run -it -p 8000:8000 -v $(pwd):/usr/src/app haskell-snap-710 /bin/bash
