@@ -1,0 +1,12 @@
+{
+  "name": "elm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "simple.js",
+  "scripts": {
+    "start": "node simple.js 8000 test.txt",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

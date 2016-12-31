@@ -1,0 +1,2 @@
+hello from redis-node-cli container
+testing 123

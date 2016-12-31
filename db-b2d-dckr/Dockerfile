@@ -86,9 +86,6 @@ RUN echo "installed esp lisp jk"
 #from docker to b2d
 #docker cp 05767738f09a:/home/buildr/.../firmware/ .
 
-#b2d? shared folders 
-#sudo mount -t vboxsf win_share /VM_share
-
 # copy files from host to docker (docker cp sometimes gives an error)
 # cd host folders
 # tar -cv * | docker exec -i ctr-id tar x -C docker-folder-path
@@ -97,9 +94,15 @@ RUN echo "installed esp lisp jk"
 #tce-load -wi python.tcz
 #ssl
 
-#python esptool.py -p /dev/ttyUSB0 --baud 115200
-#write_flash --flash_size=8m 0 0x00000.bin 0x20000 0x20000.bin
-#write_flash -fs=16m -fm qio -ff 40m 0x0 rboot.bin 0x1000 blank_config.bin 0x2000 esp-lisp.bin 
+#
+# copy version 2 prebuilt rboot and blank_config .bin files to esptool folder
+# .../esp-open-rtos/bootloader/firmware_prebuilt# cp *.bin ../../../esp-open-sdk/esptool/
+#
+# python esptool.py -p /dev/ttyUSB0 --baud 115200
+# version 1 bins
+# write_flash --flash_size=8m 0 0x00000.bin 0x20000 0x20000.bin
+# version 2 bins
+# write_flash -fs=16m -fm qio -ff 40m 0x0 rboot.bin 0x1000 blank_config.bin 0x2000 esp-lisp.bin 
 
 #gives docker ttyusb0
 # run on host, before starting b2d, to check usb devices
@@ -166,12 +169,10 @@ RUN echo "installed esp lisp jk"
 # connect to docker from win host
 #
 
-#http://ispyker.blogspot.co.uk/2014/04/
-#accessing-docker-container-private.html
+#http://ispyker.blogspot.co.uk/2014/04/accessing-docker-container-private.html
 
 # interesting for auto dns route
-#http://rosenberg.io/2014/08/08/
-#docker-boot2docker-and-dns-resolution-of-containers.html
+#http://rosenberg.io/2014/08/08/docker-boot2docker-and-dns-resolution-of-containers.html
 
 #add adapter as described, manually in vbox 
 #(may be able to adjust vagrant, as vagrant up overwrites)
@@ -233,6 +234,7 @@ RUN echo "installed esp lisp jk"
 # (seems to need root user)
 #
 # cf docker issues 8755 for details of this workaround
+# NOTE: works for flashing from docker machine
 # docker exec -ti -u 0 cont-id script -q -c "/bin/bash" /dev/null
 
 
@@ -249,4 +251,11 @@ RUN echo "installed esp lisp jk"
 # in client, env and nc server 8080, type something then enter
 # confirm data sent from client
 # docker logs nc-server
+
+#
+# see Notes.md
+#
+# docker run -it -p 8000:8000 -v $(pwd):/home/buildr/build/esp-lisp2 esp /bin/bash
+# docker run -it -u 0 --device=/dev/ttyUSB0 debian:rtos-lisp-jk /bin/bash
+
 
