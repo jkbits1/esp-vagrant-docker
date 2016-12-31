@@ -1,12 +1,16 @@
-FROM ubuntu:16.04
+FROM mongo:3.4.1
 
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
-RUN echo "deb http://repo.mongodb.org/apt/ubuntu $(cat /etc/lsb-release | grep DISTRIB_CODENAME | cut -d= -f2)/mongodb-org/3.2 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+# https://hub.docker.com/_/mongo/
 
-RUN apt-get update && apt-get install -y mongodb-org
+# FROM ubuntu:16.04
 
-RUN mkdir -p /data/db
+# RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+# RUN echo "deb http://repo.mongodb.org/apt/ubuntu $(cat /etc/lsb-release | grep DISTRIB_CODENAME | cut -d= -f2)/mongodb-org/3.2 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-3.2.list
 
-EXPOSE 27017
+# RUN apt-get update && apt-get install -y mongodb-org
 
-ENTRYPOINT ["/usr/bin/mongod"]
+# RUN mkdir -p /data/db
+
+# EXPOSE 27017
+
+# ENTRYPOINT ["/usr/bin/mongod"]
