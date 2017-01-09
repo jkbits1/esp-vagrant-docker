@@ -1,6 +1,7 @@
 # sudo mount /var ..., cd this folder
 
 # https://docs.mongodb.com/getting-started/shell/insert/
+# https://docs.docker.com/engine/tutorials/dockervolumes/#adding-a-data-volume
 
 # create mongo server
 # docker run --name mongo-server -d mongo:3.4.1
