@@ -1,4 +1,5 @@
-FROM node:4-onbuild
+FROM node:6.6.0
+# FROM node:4-onbuild
 
 EXPOSE 8000
 # EXPOSE 443
