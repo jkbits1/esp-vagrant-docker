@@ -2,6 +2,7 @@ import Html exposing (..)
 import Html.Events exposing (onClick, onInput)
 import Html.App exposing (program)
 import Html.Attributes exposing (placeholder)
+import String exposing (split)
 
 type alias Model = {
   csvData : String
@@ -24,7 +25,7 @@ view model =
       h1 [] [text "create csv section"]
     , button [ onClick Process ] [ text "Process" ]
     , input [ placeholder "main csv data", onInput Change ] []
-    , text model.csvData
+    , text <|  Maybe.withDefault "" ( List.head ( String.split "," model.csvData ) )
     ]
 
 subscriptions : Model -> Sub Msg
