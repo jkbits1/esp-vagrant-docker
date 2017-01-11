@@ -1,6 +1,6 @@
 import Html exposing (..)
 import Html.Events exposing (onClick, onInput)
-import Html.App exposing (program)
+-- import Html.App exposing (program)
 import Html.Attributes exposing (placeholder)
 import String exposing (split)
 
@@ -35,7 +35,7 @@ subscriptions model =
 init : (Model, Cmd Msg)
 init = (Model "", Cmd.none)
 
-main = Html.App.program {
+main = Html.program {
     init = init
   , view = view
   , update = update

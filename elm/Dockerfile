@@ -10,7 +10,8 @@ RUN mkdir -p /usr/src/elm-app
 # npm view elm versions
 
 # RUN npm install -g elm@0.15.1
-RUN npm install -g elm@0.17.1
+# RUN npm install -g elm@0.17.1
+RUN npm install -g elm@0.18.0
 
 RUN apt-get update
 RUN apt-get install -y vim-tiny
