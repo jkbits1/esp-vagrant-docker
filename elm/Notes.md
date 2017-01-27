@@ -11,16 +11,19 @@
 # docker build -t elm-server .
 
 # run image with cmd line
-# (probably want to do revised method below now)
-# docker run -ti --rm --name elm-svr elm-server /bin/bash
-
 # useful tips here
 # http://ralfw.de/2016/08/get-elm-up-and-running/
-# docker run -it -u 0 -p 8000:8000 -v $(pwd):/tmp/elm     elm-server /bin/bash
+# docker run -ti -p 8000:8000 -v $(pwd):/usr/src/app elm-server /bin/bash
+# docker run -ti -p 8000:8000 -p 5858:5858 -p 8080:8080 -v $(pwd):/usr/src/app elm-server /bin/bash
+#
+# versions with different user login id
 # docker run -it -u 0 -p 8000:8000 -v $(pwd):/usr/src/app elm-server /bin/bash
+# docker run -it -u 0 -p 8000:8000 -v $(pwd):/tmp/elm     elm-server /bin/bash
 
-# docker run -ti -p 8000:8000 -v $(pwd):/tmp/elm elm-server /bin/bash
+# (probably want to do revised methods above now)
+# docker run -ti --rm --name elm-svr elm-server /bin/bash
 
+# cd /usr/src/app
 # cd /tmp/elm/
 
 # elm reactor -a 0.0.0.0

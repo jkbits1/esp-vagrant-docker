@@ -3,6 +3,8 @@ FROM node:6.6.0
 
 EXPOSE 8000
 # EXPOSE 443
+EXPOSE 8080
+EXPOSE 5858
 
 RUN mkdir -p /usr/src/elm-app
 # WORKDIR /usr/src/elm-app
