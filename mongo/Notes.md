@@ -19,7 +19,16 @@
 # run from client
 # exec mongo "$MONGO_SERVER_PORT_27017_TCP_ADDR:$MONGO_SERVER_PORT_27017_TCP_PORT/test"
 
+# NOTE: this version worked later
+# docker run -it --link mongo-server:mongo --rm mongo sh -c 'exec mongo "$MONGO_PORT_27017_TCP_ADDR:$MONGO_PORT_27017_TCP_PORT/test"'
+# docker run -it --link mongo-server:mongo      mongo sh -c 'exec mongo "$MONGO_PORT_27017_TCP_ADDR:$MONGO_PORT_27017_TCP_PORT/test"'
+# docker run -it --link mongo-server mongo sh -c 'exec mongo "$MONGO_SERVER_PORT_27017_TCP_ADDR:$MONGO_SERVER_PORT_27017_TCP_PORT/test"'
 
+# still works
+# docker run -it --link mongo-server -p 8000:8000 -v $(pwd):/usr/src/app mongo /bin/bash
 
+# fails
+# docker run -it --link mongo-server mongo sh -c 'exec mongo "$MONGO_PORT_27017_TCP_ADDR:$MONGO_PORT_27017_TCP_PORT/test"'
 
-
+# works with new mongo-client 
+# docker run -it --link mongo-server -p 8000:8000 -v $(pwd):/usr/src/app mongo /bin/bash
