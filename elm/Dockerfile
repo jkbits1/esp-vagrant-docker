@@ -1,10 +1,11 @@
-FROM node:6.6.0
+FROM node:6.9.0
 # FROM node:4-onbuild
 
 EXPOSE 8000
 # EXPOSE 443
 EXPOSE 8080
 EXPOSE 5858
+EXPOSE 49153
 
 RUN mkdir -p /usr/src/elm-app
 # WORKDIR /usr/src/elm-app

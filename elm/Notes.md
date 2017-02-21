@@ -13,8 +13,9 @@
 # run image with cmd line
 # useful tips here
 # http://ralfw.de/2016/08/get-elm-up-and-running/
-# docker run -ti -p 8000:8000 -v $(pwd):/usr/src/app elm-server /bin/bash
+# docker run -ti -p 8000:8000 -p 5858:5858 -p 8080:8080 -p 49153:49153 -v $(pwd):/usr/src/app elm-server /bin/bash
 # docker run -ti -p 8000:8000 -p 5858:5858 -p 8080:8080 -v $(pwd):/usr/src/app elm-server /bin/bash
+# docker run -ti -p 8000:8000 -v $(pwd):/usr/src/app elm-server /bin/bash
 #
 # versions with different user login id
 # docker run -it -u 0 -p 8000:8000 -v $(pwd):/usr/src/app elm-server /bin/bash
