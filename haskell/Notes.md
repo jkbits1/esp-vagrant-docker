@@ -5,14 +5,18 @@
 
 # build image
 # docker build -t haskell-dev .
-# docker build -t haskell-basic .
 
-# in shared folders, go to gh carpool backend on host
+# in shared folders, go to gh haskellTest on host
 
 # useful tips here
 # http://ralfw.de/2016/08/get-elm-up-and-running/
 #
-# using postgres docker machine
+# using docker machine
+
+# use --entrypoint flag as explained here:
+# https://github.com/docker/docker/issues/5539
+# docker run -it --entrypoint=/bin/bash -v $(pwd):/usr/src/app haskell-802
+#
 # docker run -it -p 8000:8000 -v $(pwd):/usr/src/app haskell-dev /bin/bash
 # docker run -it -p 8000:8000 -v $(pwd):/usr/src/app haskell-basic /bin/bash
 # docker run -it -p 8000:8000 -v $(pwd):/usr/src/app haskell-snap-710 /bin/bash
