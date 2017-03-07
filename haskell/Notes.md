@@ -6,6 +6,14 @@
 # build image
 # docker build -t haskell-dev .
 
+#
+# NOTE: can run a container based on haskell:* image
+#       run goes into ghci, but can use entrypoint for /bin/bash     
+# docker run -it --entrypoint=/bin/bash -v $(pwd):/usr/src/app haskell:8.0.2
+# docker run -it --entrypoint=/bin/bash -v $(pwd):/usr/src/app haskell:latest
+# docker run -it --entrypoint=/bin/bash -v $(pwd):/usr/src/app haskell
+#
+
 # in shared folders, go to gh haskellTest on host
 
 # useful tips here

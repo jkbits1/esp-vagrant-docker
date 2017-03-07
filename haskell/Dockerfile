@@ -2,10 +2,16 @@
 # FROM haskell:7
 FROM haskell:8.0.2
 
+#
+# NOTE: this file may not be needed at all now, see Notes.md for
+#       directly using docker run based on haskell:* image
+#
+
 # based on docker hub page
 # https://hub.docker.com/_/haskell/
 
 # stack fails with haskell 802, skylighting fails
+# NOTE: successfully creates a container that supports ghci
 # RUN stack install pandoc pandoc-citeproc
 
 # cabal works with haskell 802, although very slow!
