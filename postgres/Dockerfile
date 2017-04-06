@@ -1,5 +1,15 @@
 FROM postgres:9.5.4
 
+WORKDIR /usr/src/app/db
+
+USER postgres
+
+RUN . ./scripts/create_fresh_carpool_db.sh carpool
+
+RUN . ./scripts/init_cp_web_role.sh carpool
+
+
+
 # see Notes.md for server, client psql
 
 # docker run -it --link cp-pg-svr carpool /bin/bash

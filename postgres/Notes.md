@@ -1,7 +1,18 @@
 # cd /var
 # mkdir VM_share 
 # sudo mount -t vboxsf c/users VM_share
-# cd VM_share/Jon/Documents/GitHub/backend2/db/
+# cd VM_share/Jon/Documents/GitHub/voteUSbackend/db/
+
+### not ready yet, just thinking through
+## auto test
+## build image
+## docker build -t pgres-cp .
+
+
+# in shared folders, go to gh carpool backend on host
+
+# SERVER - clean (can use as client with sync'ed folders)
+# docker run --name cp-pg-svr -p 5432:5432 -v $(pwd):/usr/src/app -e POSTGRES_PASSWORD=pwd -d postgres:9.5.4 
 
 # SERVER - with db
 # docker run --name cp-pg-svr -p 5432:5432 -e POSTGRES_PASSWORD=pwd -d cp-svr:db
@@ -9,8 +20,6 @@
 # SERVER - clean 
 # docker run --name cp-pg-svr -p 5432:5432 -e POSTGRES_PASSWORD=pwd -d postgres:9.5.4
 #
-# SERVER - clean (can use as client with sync'ed folders)
-# docker run --name cp-pg-svr -p 5432:5432 -v $(pwd):/usr/src/app -e POSTGRES_PASSWORD=pwd -d postgres:9.5.4 
 
 # log in to server as postgres (psql needs this account)
 # (avoids new machine just for psql client) 

@@ -11,6 +11,15 @@ RUN apt-get install -y netcat
 RUN apt-get install -y vim-tiny
 
 
+# WORKDIR /usr/src/app/nodeAppPostPg
+
+# RUN . ./scripts/expo
+
+# RUN npm start
+
+
+
+
 #  npm install pg --save --no-bin-links
 
 # for dev
