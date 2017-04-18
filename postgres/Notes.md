@@ -4,9 +4,15 @@
 # cd VM_share/Jon/Documents/GitHub/voteUSbackend/db/
 
 ### not ready yet, just thinking through
+# cd VM_share/Jon/Documents/GitHub/voteUSbackend/docker/postgres/
 ## auto test
 ## build image
 ## docker build -t pgres-cp .
+
+# docker run --name cp-pg-svr -p 5432:5432 -e POSTGRES_PASSWORD=pwd -d pgres-cp
+
+# docker exec -it -u postgres e06 /bin/bash
+
 
 
 # in shared folders, go to gh carpool backend on host
