@@ -9,8 +9,8 @@
 
 # useful
 # https://hub.docker.com/r/grahamc/jekyll/
+# docker run --rm -v $(pwd):/src -p 4000:4000 grahamc/jekyll serve -H 0.0.0.0 --watch --config _config-dev.yml
 # docker run --rm -v $(pwd):/src -p 4000:4000 grahamc/jekyll serve -H 0.0.0.0
-# docker run --rm -v $(pwd):/src -p 4000:4000 grahamc/jekyll serve -H 0.0.0.0 --config _config-dev.yml
 #
 # docker run --name jekyll -v $(pwd):/usr/src/app -p 4000:4000 grahamc/jekyll build 
 
