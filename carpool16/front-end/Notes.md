@@ -5,7 +5,7 @@
 # mkdir vms (VM_share) 
  
 # sudo mount -t vboxsf c/users vms
-# cd VM_share/Jon/Documents/GitHub/esp-vagrant-docker/carpool/front-end
+# cd VM_share/Jon/Documents/GitHub/esp-vagrant-docker/carpool16/front-end
 
 # build image
 # docker build -t cp-fe .
