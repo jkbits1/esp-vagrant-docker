@@ -18,7 +18,12 @@
 # useful tips here - http://ralfw.de/2016/08/get-elm-up-and-running/
 # 8000 - node server, 5858/8080 node inspector
 # named node_modules volume
+#
+# stats server
 # docker run -it --name stats-server -p 8000:8000 -p 5858:5858 -p 8080:8080 -v $(pwd):/usr/src/app -v stats_node_modules:/usr/src/app/node_modules/ stats-svr /bin/bash
+
+# cas server
+# docker run -it --name cas-server -v $(pwd):/usr/src/app -v cas_node_modules:/usr/src/app/node_modules/ stats-svr /bin/bash
 # unnamed volume
 # docker run -it --name vid-info-server -p 8000:8000 -p 5858:5858 -p 8080:8080 -v $(pwd):/usr/src/app -v /usr/src/app/vidInfo/node_modules/ vid-info-svr /bin/bash
 # default node_modules (no volume)
